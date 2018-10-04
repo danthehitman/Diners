@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HL.Diners.Model
+namespace HL.Diners.Core.Model
 {
     public class Cycle : Entity
     {

@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Diners\Api.csproj", "{CCEA4942-3A59-48B8-ADE5-CE5E795CF7AF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{9BC071AB-9575-4061-946A-42918EBFBE51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HL.Diners.Infrastructure", "Data\HL.Diners.Infrastructure.csproj", "{9BC071AB-9575-4061-946A-42918EBFBE51}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{4B24AAC5-B02D-4D46-B8E2-ADAF36DB1CBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HL.Diners.Core", "Model\HL.Diners.Core.csproj", "{4B24AAC5-B02D-4D46-B8E2-ADAF36DB1CBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

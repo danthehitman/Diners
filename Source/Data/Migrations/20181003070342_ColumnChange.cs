@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace HL.Diners.Data.Migrations
+namespace HL.Diners.Infrastructure.Migrations
 {
     public partial class ColumnChange : Migration
     {

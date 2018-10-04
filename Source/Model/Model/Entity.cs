@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HL.Diners.Model
+namespace HL.Diners.Core.Model
 {
     public class Entity
     {

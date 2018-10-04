@@ -1,6 +1,6 @@
-﻿namespace HL.Diners.Model
+﻿namespace HL.Diners.Api.Dto
 {
-    public class Bucket : Entity
+    public class BucketDto : Dto
     {
         public string Name { get; set; }
         public int Target { get; set; }

@@ -1,10 +1,12 @@
-﻿using HL.Diners.Data;
+﻿using AutoMapper;
+using HL.Diners.Core.Data;
+using HL.Diners.Infrastructure.EfData;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 
 namespace HL.Diners.Api
 {
@@ -40,6 +42,23 @@ namespace HL.Diners.Api
                 connectionString = $"Server=127.0.0.1;Port={Configuration["Authentication:Postgres:Port"]};Database={Configuration["Authentication:Postgres:Database"]};User Id={Configuration["Authentication:Postgres:User"]};Password={Configuration["Authentication:Postgres:Password"]}; Persist Security Info=True;";
             }
             services.AddEntityFrameworkNpgsql().AddDbContext<DinersContext>(options => options.UseNpgsql(connectionString));
+
+            services.AddAutoMapper();
+            services.AddMvc(
+                //options =>
+                //{
+                //    options.SslPort = 44377;
+                //    options.Filters.Add(new RequireHttpsAttribute());
+                //}
+                )
+                .AddJsonOptions(options =>
+                {
+                    // Setup json serializer
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                });
+
+            services.AddScoped<IDinersRepository, EfDinersRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,11 +68,7 @@ namespace HL.Diners.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            app.UseMvc();
         }
     }
 }

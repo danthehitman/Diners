@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>HL.Diners.Model</RootNamespace>
+    <RootNamespace>HL.Diners.Core</RootNamespace>
   </PropertyGroup>
 
 </Project>

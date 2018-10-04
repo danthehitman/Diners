@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
-namespace HL.Diners.Data.Migrations
+namespace HL.Diners.Infrastructure.Migrations
 {
     public partial class InitialCreate : Migration
     {

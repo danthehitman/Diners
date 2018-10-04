@@ -2,9 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>HL.Diners.Data</RootNamespace>
+    <RootNamespace>HL.Diners.Infrastructure</RootNamespace>
+    <AssemblyName>HL.Diners.Infrastructure</AssemblyName>
   </PropertyGroup>
     <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.4" />
     </ItemGroup>
@@ -15,7 +17,7 @@
         </PackageReference>
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\Model\Model.csproj" />
+      <ProjectReference Include="..\Model\HL.Diners.Core.csproj" />
     </ItemGroup>
 
 </Project>
