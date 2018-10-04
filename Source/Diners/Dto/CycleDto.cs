@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 
 namespace HL.Diners.Api.Dto
@@ -7,8 +8,9 @@ namespace HL.Diners.Api.Dto
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public List<BucketDto> Planned { get; set; }
-        public double Income { get; set; }
+        public List<BucketDto> Expenses { get; set; }
+        public double Budget { get; set; }
         public double SavingsTarget { get; set; }
+        public JObject ExtendedData { get; set; }
     }
 }

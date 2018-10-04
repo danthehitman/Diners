@@ -3,15 +3,17 @@ using System;
 using HL.Diners.Infrastructure.EfData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HL.Diners.Infrastructure.Migrations
 {
     [DbContext(typeof(DinersContext))]
-    partial class DinersContextModelSnapshot : ModelSnapshot
+    [Migration("20181004154735_10418-1")]
+    partial class _104181
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,9 +54,9 @@ namespace HL.Diners.Infrastructure.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<DateTime>("EndDate");
+                    b.Property<string>("DataString");
 
-                    b.Property<string>("ExtendedData");
+                    b.Property<DateTime>("EndDate");
 
                     b.Property<DateTime>("Modified");
 
