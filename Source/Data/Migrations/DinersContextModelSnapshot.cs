@@ -70,7 +70,7 @@ namespace HL.Diners.Infrastructure.Migrations
             modelBuilder.Entity("HL.Diners.Core.Model.Bucket", b =>
                 {
                     b.HasOne("HL.Diners.Core.Model.Cycle")
-                        .WithMany("Expenses")
+                        .WithMany("Buckets")
                         .HasForeignKey("CycleId");
                 });
 #pragma warning restore 612, 618

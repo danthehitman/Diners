@@ -1,0 +1,12 @@
+<template>
+  <div class="cycle-list">
+     <ul class="list-group">
+       <li repeat.for="cycle of cycles" class="list-group-item ${cycle.id === $parent.selectedId ? 'active' : ''}">
+         <a route-href="route: cycles; params.bind: {id:cycle.id}" click.delegate="$parent.select(cycle)">
+           <h4>${cycle.startDate} ${cycle.endDate}</h4>
+           <p>${cycle.budget}</p>
+         </a>
+       </li>
+     </ul>
+   </div>
+ </template>
