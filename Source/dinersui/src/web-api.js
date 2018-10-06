@@ -8,41 +8,41 @@ function getId(){
 let cycles = [
   {
     id:getId(),
-    startDate:'10/4/2018',
-    endDate:'10/30/218',
-    buckets: [{name:"bucket1"}],
+    startDate: new Date(),
+    endDate:new Date(),
+    buckets: [{name:'bucket1'}],
     budget: 1000,
     savingsTarget:100
   },
   {
     id:getId(),
-    startDate:'10/4/2018',
-    endDate:'10/30/218',
-    buckets: [{name:"bucket1"}],
+    startDate: new Date(),
+    endDate:new Date(),
+    buckets: [{name:'bucket1'}],
     budget: 1000,
     savingsTarget:100
   },
   {
     id:getId(),
-    startDate:'10/4/2018',
-    endDate:'10/30/218',
-    buckets: [{name:"bucket1"}],
+    startDate: new Date(),
+    endDate:new Date(),
+    buckets: [{name:'bucket1'}],
     budget: 1000,
     savingsTarget:100
   },
   {
     id:getId(),
-    startDate:'10/4/2018',
-    endDate:'10/30/218',
-    buckets: [{name:"bucket1"}],
+    startDate: new Date(),
+    endDate:new Date(),
+    buckets: [{name:'bucket1'}],
     budget: 1000,
     savingsTarget:100
   },
   {
     id:getId(),
-    startDate:'10/4/2018',
-    endDate:'10/30/218',
-    buckets: [{name:"bucket1"}],
+    startDate: new Date(),
+    endDate:new Date(),
+    buckets: [{name:'bucket1'}],
     budget: 1000,
     savingsTarget:100
   }

@@ -1,12 +1,15 @@
 import {computedFrom} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {CycleUpdated,CycleViewed} from './messages';
 import {inject} from 'aurelia-framework';
 import {WebAPI} from './web-api';
-import {areEqual} from './utility';
+import {_} from 'underscore';
 
-@inject(WebAPI)
+@inject(WebAPI, EventAggregator)
 export class CycleDetail {
-  constructor(api){
+  constructor(api, ea){
     this.api = api;
+    this.ea = ea;
   }
 
   // this is a framework lifecycle method that gets called right before the router activates this component.
@@ -17,6 +20,7 @@ export class CycleDetail {
       this.cycle = cycle;
       this.routeConfig.navModel.setTitle(cycle.startDate);
       this.originalCycle = JSON.parse(JSON.stringify(cycle));
+      this.ea.publish(new CycleViewed(this.cycle));
     });
   }
 
@@ -50,8 +54,14 @@ export class CycleDetail {
 
   // Cancel navigation away from this component if you wish.
   canDeactivate() {
-    if (!areEqual(this.originalCycle, this.cycle)){
-      return confirm('You have unsaved changes. Are you sure you wish to leave?');
+    if (!_.isEqual(this.originalCycle, this.cycle)){
+      let result = confirm('You have unsaved changes. Are you sure you wish to leave?');
+
+      if (!result) {
+        this.ea.publish(new CycleViewed(this.cycle));
+      }
+
+      return result;
     }
 
     return true;

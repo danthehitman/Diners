@@ -1,4 +1,6 @@
 <template>
+    <require from="./formatters/currencyFormat"></require>
+    <require from="./formatters/dateFormat"></require>
   <div class="card">
     <div class="card-header text-white bg-primary">
       <h3>Profile</h3>
@@ -8,28 +10,28 @@
         <div class="form-group row">
           <label class="col-sm-3 col-form-label">Start Date</label>
           <div class="col-sm-9">
-            <input type="text" placeholder="start date" class="form-control" value.bind="cycle.startDate">
+            <input type="text" placeholder="start date" class="form-control" value.bind="cycle.startDate | dateFormat">
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-3 col-form-label">End Date</label>
           <div class="col-sm-9">
-            <input type="text" placeholder="end date" class="form-control" value.bind="cycle.endDate">
+            <input type="text" placeholder="end date" class="form-control" value.bind="cycle.endDate | dateFormat">
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-3 col-form-label">Budget</label>
           <div class="col-sm-9">
-            <input type="text" placeholder="budget" class="form-control" value.bind="cycle.budget">
+            <input type="text" placeholder="budget" class="form-control" value.bind="cycle.budget | currencyFormat">
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-3 col-form-label">Savings Target</label>
           <div class="col-sm-9">
-            <input type="text" placeholder="savings target" class="form-control" value.bind="cycle.savingsTarget">
+            <input type="text" placeholder="savings target" class="form-control" value.bind="cycle.savingsTarget | currencyFormat">
           </div>
         </div>
         <div class="form-group">
