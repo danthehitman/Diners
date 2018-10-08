@@ -1,13 +1,13 @@
 <template>
-    <require from="./formatters/currencyFormat"></require>
-    <require from="./formatters/dateFormat"></require>
+  <require from="./formatters/integerFormat"></require>
+  <require from="./formatters/dateFormat"></require>
   <div class="card">
     <div class="card-header text-white bg-primary">
-      <h3>Profile</h3>
+      <h3>Cycle</h3>
     </div>
     <div class="card-body">
       <form role="form">
-        <div class="form-group row">
+        <div class="form-group">
           <label class="col-sm-3 col-form-label">Start Date</label>
           <div class="col-sm-9">
             <input type="text" placeholder="start date" class="form-control" value.bind="cycle.startDate | dateFormat">
@@ -24,26 +24,41 @@
         <div class="form-group">
           <label class="col-sm-3 col-form-label">Budget</label>
           <div class="col-sm-9">
-            <input type="text" placeholder="budget" class="form-control" value.bind="cycle.budget | currencyFormat">
+            <input type="text" placeholder="budget" class="form-control" value.bind="cycle.budget | integerFormat">
           </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-3 col-form-label">Buckets</label>
+          <ul class="list-group">
+            <li repeat.for="bucket of cycle.buckets" class="list-group-item">
+              <input type="text" class="form-control" placeholder="bucket name" value.bind="bucket.name">
+              <label class="col-sm-3 col-form-label">Target</label>
+              <input type="text" placeholder="target" value.bind="bucket.target | integerFormat">
+              <br/>
+              <label class="col-sm-3 col-form-label">Used</label>
+              <input type="text" placeholder="used" value.bind="bucket.used | integerFormat">
+            </li>
+          </ul>
+          <button class="btn btn-success float-right" click.delegate="addBucket()">Add Bucket</button>
         </div>
 
         <div class="form-group">
           <label class="col-sm-3 col-form-label">Savings Target</label>
           <div class="col-sm-9">
-            <input type="text" placeholder="savings target" class="form-control" value.bind="cycle.savingsTarget | currencyFormat">
+            <input type="text" placeholder="savings target" class="form-control" value.bind="cycle.savingsTarget | integerFormat">
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-3 col-form-label">Flex</label>
           <div class="col-sm-9">
-            <div class="col-sm-3 col-form-label"  textcontent.bind="flex"></div>
+            <div class="col-sm-3 col-form-label" textcontent.bind="flex"></div>
           </div>
         </div>
       </form>
       <div>
         <button class="btn btn-success float-right" click.delegate="save()" disabled.bind="!canSave">Save</button>
-    </div>
+      </div>
     </div>
   </div>
 </template>

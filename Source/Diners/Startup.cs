@@ -40,7 +40,21 @@ namespace HL.Diners.Api
             if (Configuration["Authentication:Postgres:Password"] != null)
             {
                 connectionString = $"Server=127.0.0.1;Port={Configuration["Authentication:Postgres:Port"]};Database={Configuration["Authentication:Postgres:Database"]};User Id={Configuration["Authentication:Postgres:User"]};Password={Configuration["Authentication:Postgres:Password"]}; Persist Security Info=True;";
+
             }
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CORS", corsPolicyBuilder => corsPolicyBuilder.AllowAnyOrigin()
+                    // Apply CORS policy for any type of origin  
+                    .AllowAnyMethod()
+                    // Apply CORS policy for any type of http methods  
+                    .AllowAnyHeader()
+                    // Apply CORS policy for any headers  
+                    .AllowCredentials());
+                // Apply CORS policy for all users  
+            });
+
             services.AddEntityFrameworkNpgsql().AddDbContext<DinersContext>(options => options.UseNpgsql(connectionString));
 
             services.AddAutoMapper();
@@ -64,6 +78,8 @@ namespace HL.Diners.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors("CORS");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

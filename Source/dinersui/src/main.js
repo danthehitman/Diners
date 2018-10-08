@@ -1,9 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
+import 'whatwg-fetch';
 import environment from './environment';
 import {PLATFORM} from 'aurelia-pal';
 import 'babel-polyfill';
-import * as Bluebird from 'bluebird';
+import * as Bluebird from 'bluebird'; 
+
 
 // remove out if you don't want a Promise polyfill (remove also from webpack.config.js)
 Bluebird.config({ warnings: { wForgottenReturn: false } });
