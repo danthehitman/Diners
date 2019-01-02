@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using HL.Diners.Api.Dto;
+using HL.Diners.Core.Model;
 
 namespace HL.Diners.Api.Mapping
 {
@@ -6,9 +8,10 @@ namespace HL.Diners.Api.Mapping
     {
         public TypeMaps()
         {
-            //CreateMap<Cycle, CycleDto>().ForMember(
-            //    dest => dest.Data,
-            //    opts => opts.MapFrom(src => src.EntityData));
+            CreateMap<PostCycleDto, Cycle>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.Modified, opt => opt.Ignore());
         }
     }
 }

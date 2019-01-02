@@ -1,23 +1,27 @@
 <template>
   <require from="./formatters/integerFormat"></require>
   <require from="./formatters/dateFormat"></require>
+  <require from="./cycle-list"></require>
   <div class="card">
     <div class="card-header text-white bg-primary">
       <h3>Cycle</h3>
+    </div>
+    <div>
+      <cycle-list class="col-md-4"></cycle-list>
     </div>
     <div class="card-body">
       <form role="form">
         <div class="form-group">
           <label class="col-sm-3 col-form-label">Start Date</label>
           <div class="col-sm-9">
-            <input type="text" placeholder="start date" class="form-control" value.bind="cycle.startDate | dateFormat">
+            <abp-datetime-picker value.bind="cycle.startDate | dateFormat" options.bind="{ format: 'MM-DD-YYYY' }"></abp-datetime-picker>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-3 col-form-label">End Date</label>
           <div class="col-sm-9">
-            <input type="text" placeholder="end date" class="form-control" value.bind="cycle.endDate | dateFormat">
+            <abp-datetime-picker value.bind="cycle.endDate | dateFormat" options.bind="{ format: 'MM-DD-YYYY' }"></abp-datetime-picker>
           </div>
         </div>
 

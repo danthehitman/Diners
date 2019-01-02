@@ -1,6 +1,7 @@
 ﻿using HL.Diners.Core.Exceptions;
 using HL.Diners.Core.Model;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,14 +24,14 @@ namespace HL.Diners.Infrastructure.EfData
             return cycle;
         }
 
-        public IEnumerable<Cycle> GetCycles()
+        public async Task<IEnumerable<Cycle>> GetCyclesAsync()
         {
-            return _context.Cycles;
+            return await _context.Cycles.Include(cycle => cycle.Buckets).ToListAsync();
         }
 
         public async Task<Cycle> GetCycleAsync(string id)
         {
-            return await _context.Cycles.FindAsync(id);
+            return await _context.Cycles.Include(cycle => cycle.Buckets).FirstOrDefaultAsync(cycle => cycle.Id == id);
         }
 
         public async Task<Cycle> UpdateCycleAsync(Cycle cycle)
@@ -70,7 +71,12 @@ namespace HL.Diners.Infrastructure.EfData
 
         public bool CycleExists(string id)
         {
-            return GetCycles().Any(e => e.Id == id);
+            return GetCyclesAsync().Result.Any(e => e.Id == id);
+        }
+
+        public Task<Cycle> GetActiveCycleByUserAsync(string userId)
+        {
+            return _context.Cycles.FirstOrDefaultAsync(c => c.StartDate <= DateTime.Now && c.EndDate >= DateTime.Now);
         }
     }
 }

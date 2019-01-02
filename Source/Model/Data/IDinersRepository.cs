@@ -7,8 +7,9 @@ namespace HL.Diners.Core.Data
     public interface IDinersRepository
     {
         Task<Cycle> AddCycleAsync(Cycle cycle);
-        IEnumerable<Cycle> GetCycles();
+        Task<IEnumerable<Cycle>> GetCyclesAsync();
         Task<Cycle> GetCycleAsync(string id);
+        Task<Cycle> GetActiveCycleByUserAsync(string userId);
         Task<Cycle> UpdateCycleAsync(Cycle cycle);
         Task RemoveCycleAsync(string id);
         bool CycleExists(string id);

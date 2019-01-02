@@ -1,7 +1,7 @@
 import { computedFrom } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { Router} from 'aurelia-router';
-import { CycleViewed } from './messages';
+import { Router } from 'aurelia-router';
+import { CycleViewed, CycleUpdated } from './messages';
 import { inject } from 'aurelia-framework';
 import { WebAPI } from './web-api';
 import { _ } from 'underscore';
@@ -26,10 +26,10 @@ export class CycleDetail {
         this.originalCycle = JSON.parse(JSON.stringify(cycle));
         this.ea.publish(new CycleViewed(this.cycle));
       }
-      else{
+      else {
         alert("No route found with id: " + params.id);
         this.cycle = {};
-        this.router.navigateToRoute('cycles', {id:"new"});
+        this.router.navigateToRoute('cycles', { id: "new" });
       }
     });
   }
@@ -70,11 +70,22 @@ export class CycleDetail {
   }
 
   save() {
-    this.api.updateCycle(this.cycle).then(cycle => {
-      this.cycle = cycle;
-      this.routeConfig.navModel.setTitle(cycle.startDate);
-      this.originalCycle = JSON.parse(JSON.stringify(cycle));
-    });
+    if (this.cycle.id === "new") {
+      delete this.cycle.id;
+      this.api.createCycle(this.cycle).then(cycle => {
+        this.cycle = cycle;
+        this.routeConfig.navModel.setTitle(cycle.startDate);
+        this.originalCycle = JSON.parse(JSON.stringify(cycle));
+      });
+    }
+    else {
+      this.api.updateCycle(this.cycle).then(cycle => {
+        //this.cycle = cycle;
+        this.routeConfig.navModel.setTitle(this.cycle.startDate);
+        this.originalCycle = JSON.parse(JSON.stringify(this.cycle));
+        this.ea.publish(new CycleUpdated(this.cycle));
+      });
+    }
   }
 
   // Cancel navigation away from this component if you wish.

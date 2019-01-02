@@ -24,9 +24,9 @@ namespace Api.Controllers
 
         // GET: api/Cycles
         [HttpGet]
-        public IEnumerable<Cycle> GetCycles()
+        public async Task<IEnumerable<Cycle>> GetCycles()
         {
-            return _db.GetCycles();
+            return await _db.GetCyclesAsync();
         }
 
         // GET: api/Cycles/5
@@ -39,6 +39,24 @@ namespace Api.Controllers
             }
 
             var cycle = await _db.GetCycleAsync(id);
+
+            if (cycle == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<Cycle>(cycle));
+        }
+
+        [HttpGet("active")]
+        public async Task<IActionResult> GetActiveCycle()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var cycle = await _db.GetActiveCycleByUserAsync("");
 
             if (cycle == null)
             {
@@ -76,16 +94,16 @@ namespace Api.Controllers
 
         // POST: api/Cycles
         [HttpPost]
-        public async Task<IActionResult> PostCycle([FromBody] CycleDto cycleDto)
+        public async Task<IActionResult> PostCycle([FromBody] PostCycleDto postCycleDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            Cycle cycle = await _db.AddCycleAsync(_mapper.Map<Cycle>(cycleDto));
+            var cycle = await _db.AddCycleAsync(_mapper.Map<Cycle>(postCycleDto));
 
-            cycleDto = _mapper.Map<CycleDto>(cycle);
+            var cycleDto = _mapper.Map<CycleDto>(cycle);
 
             return CreatedAtAction("GetCycle", new { id = cycleDto.Id }, cycleDto);
         }

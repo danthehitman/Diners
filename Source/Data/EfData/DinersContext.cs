@@ -14,10 +14,11 @@ namespace HL.Diners.Infrastructure.EfData
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cycle>()
-             .Property(c => c.ExtendedData)
-             .HasConversion(
-                 v => JsonConvert.SerializeObject(v),
-                 v => JsonConvert.DeserializeObject<JObject>(v));
+                .ToTable("Cycle")
+                .Property(c => c.ExtendedData)
+                .HasConversion(
+                    v => JsonConvert.SerializeObject(v),
+                    v => JsonConvert.DeserializeObject<JObject>(v));
         }
     }
 }

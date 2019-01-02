@@ -7,6 +7,8 @@ namespace HL.Diners.Core.Model
         public Entity()
         {
             Id = Guid.NewGuid().ToString();
+            Created = DateTime.Now;
+            Modified = DateTime.Now;
         }
 
         public string Id { get; set; }

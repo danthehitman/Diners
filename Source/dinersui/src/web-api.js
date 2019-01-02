@@ -1,55 +1,5 @@
 import { HttpClient } from 'aurelia-fetch-client';
 
-let latency = 200;
-let id = 0;
-
-function getId() {
-  return ++id;
-}
-
-let cycles = [
-  {
-    id: getId(),
-    startDate: new Date(),
-    endDate: new Date(),
-    buckets: [{ name: 'bucket1', target: 100, used: 10 }],
-    budget: 1000,
-    savingsTarget: 100
-  },
-  {
-    id: getId(),
-    startDate: new Date(),
-    endDate: new Date(),
-    buckets: [{ name: 'bucket1', target: 100, used: 10 }],
-    budget: 1000,
-    savingsTarget: 100
-  },
-  {
-    id: getId(),
-    startDate: new Date(),
-    endDate: new Date(),
-    buckets: [{ name: 'bucket1', target: 100, used: 10 }],
-    budget: 1000,
-    savingsTarget: 100
-  },
-  {
-    id: getId(),
-    startDate: new Date(),
-    endDate: new Date(),
-    buckets: [{ name: 'bucket1', target: 100, used: 10 }],
-    budget: 1000,
-    savingsTarget: 100
-  },
-  {
-    id: getId(),
-    startDate: new Date(),
-    endDate: new Date(),
-    buckets: [{ name: 'bucket1', target: 100, used: 10 }],
-    budget: 1000,
-    savingsTarget: 100
-  }
-];
-
 export class WebAPI {
   isRequesting = false;
 
@@ -73,6 +23,26 @@ export class WebAPI {
       //     return request;
       //   }
       // });
+    });
+  }
+
+  getActiveCycle() {
+    this.isRequesting = true;
+
+    return new Promise(resolve => {
+      this.httpClient
+        .fetch('cycles/active', {
+          method: 'get'
+        })
+        .then(response => response.json())
+        .then(cycles => {
+          resolve(cycles);
+          this.isRequesting = false;
+        })
+        .catch(error => {
+          alert('Error getting cycles!');
+          this.isRequesting = false;
+        });
     });
   }
 
@@ -122,12 +92,36 @@ export class WebAPI {
           method: 'put',
           body: JSON.stringify(cycle)
         })
-        .then(response => response.json())
         .then(savedCycle => {
-          alert(`Saved comment! ID: ${savedCycle.id}`);
+          alert(`Saved cycle!`);
+          this.isRequesting = false
+          resolve();
         })
         .catch(error => {
           alert('Error saving comment!');
+          this.isRequesting = false;
+          reject("Error");
+        });
+    });
+  }
+
+  createCycle(cycle) {
+    this.isRequesting = true;
+    return new Promise(resolve => {
+      this.httpClient
+        .fetch('cycles/', {
+          method: 'post',
+          body: JSON.stringify(cycle)
+        })
+        .then(savedCycle => {
+          alert(`Saved cycle!`);
+          this.isRequesting = false
+          resolve(savedCycle);
+        })
+        .catch(error => {
+          alert('Error creating comment!');
+          this.isRequesting = false;
+          reject("Error");
         });
     });
   }

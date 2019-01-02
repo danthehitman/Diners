@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HL.Diners.Infrastructure.Migrations
 {
     [DbContext(typeof(DinersContext))]
-    [Migration("20181004154735_10418-1")]
-    partial class _104181
+    [Migration("20181009035645_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,9 +54,9 @@ namespace HL.Diners.Infrastructure.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<string>("DataString");
-
                     b.Property<DateTime>("EndDate");
+
+                    b.Property<string>("ExtendedData");
 
                     b.Property<DateTime>("Modified");
 
@@ -66,13 +66,13 @@ namespace HL.Diners.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cycles");
+                    b.ToTable("Cycle");
                 });
 
             modelBuilder.Entity("HL.Diners.Core.Model.Bucket", b =>
                 {
                     b.HasOne("HL.Diners.Core.Model.Cycle")
-                        .WithMany("Expenses")
+                        .WithMany("Buckets")
                         .HasForeignKey("CycleId");
                 });
 #pragma warning restore 612, 618

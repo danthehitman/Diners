@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HL.Diners.Infrastructure.Migrations
 {
@@ -8,18 +8,21 @@ namespace HL.Diners.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Cycles",
+                name: "Cycle",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
-                    Income = table.Column<double>(nullable: false),
-                    SavingsTarget = table.Column<double>(nullable: false)
+                    Budget = table.Column<double>(nullable: false),
+                    SavingsTarget = table.Column<double>(nullable: false),
+                    ExtendedData = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cycles", x => x.Id);
+                    table.PrimaryKey("PK_Cycle", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -27,18 +30,20 @@ namespace HL.Diners.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Target = table.Column<int>(nullable: false),
-                    Current = table.Column<int>(nullable: false),
+                    Used = table.Column<int>(nullable: false),
                     CycleId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bucket", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bucket_Cycles_CycleId",
+                        name: "FK_Bucket_Cycle_CycleId",
                         column: x => x.CycleId,
-                        principalTable: "Cycles",
+                        principalTable: "Cycle",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -55,7 +60,7 @@ namespace HL.Diners.Infrastructure.Migrations
                 name: "Bucket");
 
             migrationBuilder.DropTable(
-                name: "Cycles");
+                name: "Cycle");
         }
     }
 }

@@ -64,7 +64,7 @@ namespace HL.Diners.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cycles");
+                    b.ToTable("Cycle");
                 });
 
             modelBuilder.Entity("HL.Diners.Core.Model.Bucket", b =>
