@@ -3,7 +3,7 @@ import { WebAPI } from './web-api';
 import moment from 'moment';
 
 @inject(WebAPI)
-export class CycleDetail {
+export class CycleActive {
   constructor(api) {
     this.api = api;
   }
@@ -26,4 +26,16 @@ export class CycleDetail {
   get dateRange() {
     return moment(this.cycle.startDate).format("MM/DD/YYYY") + " - " + moment(this.cycle.endDate).format("MM/DD/YYYY");
   }
+
+  summaryClicked() {
+    alert("Summary");
+  }
+
+  newEntryClicked() {
+    alert("New entry");
+  }
+
+  showNewEntry = true;
+  tempdata = "";
+  tempvalue= "";
 }

@@ -9,7 +9,8 @@ export class WebAPI {
     this.httpClient.configure(config => {
       config
         .useStandardConfiguration()
-        .withBaseUrl('https://localhost:44316/api/')
+        .withBaseUrl('https://192.168.1.19:5001/api/')
+        // .withBaseUrl('https://localhost:5001/api/')
         .withDefaults({
           // credentials: 'same-origin',
           headers: {

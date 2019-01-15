@@ -27,7 +27,7 @@ export class CycleList {
   newCycle()
   {
     this.select("new");
-    this.router.navigateToRoute('cycles', {id:"new"});
+    this.router.navigateToRoute('cycle-detail', {id:"new"});
   }
 
   select(id) {

@@ -4,6 +4,7 @@ using HL.Diners.Infrastructure.EfData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using NetTopologySuite.Geometries;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HL.Diners.Infrastructure.Migrations
@@ -33,8 +34,6 @@ namespace HL.Diners.Infrastructure.Migrations
                     b.Property<string>("Name");
 
                     b.Property<int>("Target");
-
-                    b.Property<int>("Used");
 
                     b.HasKey("Id");
 
@@ -67,11 +66,46 @@ namespace HL.Diners.Infrastructure.Migrations
                     b.ToTable("Cycle");
                 });
 
+            modelBuilder.Entity("HL.Diners.Core.Model.Entry", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Ammount");
+
+                    b.Property<string>("BucketId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Location");
+
+                    b.Property<Point>("LocationPoint");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Notes");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BucketId");
+
+                    b.ToTable("Entry");
+                });
+
             modelBuilder.Entity("HL.Diners.Core.Model.Bucket", b =>
                 {
                     b.HasOne("HL.Diners.Core.Model.Cycle")
                         .WithMany("Buckets")
                         .HasForeignKey("CycleId");
+                });
+
+            modelBuilder.Entity("HL.Diners.Core.Model.Entry", b =>
+                {
+                    b.HasOne("HL.Diners.Core.Model.Bucket")
+                        .WithMany("Entries")
+                        .HasForeignKey("BucketId");
                 });
 #pragma warning restore 612, 618
         }

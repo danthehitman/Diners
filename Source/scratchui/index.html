@@ -1,14 +1,52 @@
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+</head>
 
 <body>
 
-    <script src="js/lib/jquery-3.3.1.min.js"></script>
-    <script src="js/dinersApi.js"></script>
-    <script src="js/app.js"></script>
-    <div>
-        <div id="testDiv">test1</div>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/active-cycle.css">
+  <link rel="stylesheet" href="css/jquery-ui/jquery-ui.min.css">
+  <link rel="stylesheet" href="css/jquery-ui/jquery-ui.theme.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  
+  <script src="js/lib/jquery-3.3.1.min.js"></script>
+  <script src="js/lib/jquery-ui.min.js"></script>
+  <script src="js/lib/knockout-3.4.2.js"></script>
+  <script src="js/lib/knockout.mapping-2.4.1.js"></script>
+  <script src="js/lib/bootstrap.min.js"></script>
+  <script src="js/lib/knockout-jqueryui.min.js"></script>
+
+  <script src="js/ActiveCycleViewModel.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dinersApi.js"></script>
+  <script src="js/observable.js"></script>
+  <script src="js/app.js"></script>
+
+  <div id="app-container"></div>
+  <div id="active-cycle-container" class="center">
+
+    <div class="card-header text-white bg-primary">
+      <h3>${dateRange}</h3>
     </div>
+
+    <div id="active-cycle-container-div">
+      <div id="active-cycle-summary-div" click.delegate="summaryClicked()"></div>
+      <div id="active-cycle-top-buckets-div"></div>
+      <div id="active-cycle-savings-div"></div>
+      <div id="active-cycle-buffer-div"></div>
+      <div id="plus-entry-button-div" data-bind="click: newEntryClicked"></div>
+    </div>
+
+    <div id="new-entry-view"></div>
+    <script>$("#new-entry-view").load("html/newEntryView.html");</script>
+    
+  </div>
 
 </body>
 

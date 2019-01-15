@@ -9,7 +9,7 @@ import gulp from 'gulp';
 function runWebpack(done) {
   // https://webpack.github.io/docs/webpack-dev-server.html
   let opts = {
-    host: 'localhost',
+    host: '0.0.0.0',
     publicPath: config.output.publicPath,
     filename: config.output.filename,
     hot: project.platform.hmr || CLIOptions.hasFlag('hmr'),
@@ -19,7 +19,8 @@ function runWebpack(done) {
     open: project.platform.open,
     stats: {
       colors: require('supports-color')
-    }
+    },
+    https: config.devServer.https
   };
 
   if (project.platform.hmr || CLIOptions.hasFlag('hmr')) {

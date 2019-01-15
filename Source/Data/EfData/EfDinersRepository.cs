@@ -26,12 +26,13 @@ namespace HL.Diners.Infrastructure.EfData
 
         public async Task<IEnumerable<Cycle>> GetCyclesAsync()
         {
-            return await _context.Cycles.Include(cycle => cycle.Buckets).ToListAsync();
+            return await _context.Cycles.Include(cycle => cycle.Buckets).ThenInclude(bucket => bucket.Entries).ToListAsync();
         }
 
         public async Task<Cycle> GetCycleAsync(string id)
         {
-            return await _context.Cycles.Include(cycle => cycle.Buckets).FirstOrDefaultAsync(cycle => cycle.Id == id);
+            return await _context.Cycles.Include(cycle => cycle.Buckets).ThenInclude(bucket => bucket.Entries)
+                .FirstOrDefaultAsync(cycle => cycle.Id == id);
         }
 
         public async Task<Cycle> UpdateCycleAsync(Cycle cycle)
@@ -59,7 +60,7 @@ namespace HL.Diners.Infrastructure.EfData
 
         public async Task RemoveCycleAsync(string id)
         {
-            var cycle = await _context.Cycles.FindAsync(id);
+            var cycle = await _context.Cycles.Include(c => c.Buckets).ThenInclude(b => b.Entries).FirstAsync(c => c.Id == id);
             if (cycle == null)
             {
                 throw new DinersNotFoundException();
@@ -76,7 +77,8 @@ namespace HL.Diners.Infrastructure.EfData
 
         public Task<Cycle> GetActiveCycleByUserAsync(string userId)
         {
-            return _context.Cycles.FirstOrDefaultAsync(c => c.StartDate <= DateTime.Now && c.EndDate >= DateTime.Now);
+            return _context.Cycles.Include(cycle => cycle.Buckets).ThenInclude(bucket => bucket.Entries)
+                .FirstOrDefaultAsync(c => c.StartDate <= DateTime.Now && c.EndDate >= DateTime.Now);
         }
     }
 }

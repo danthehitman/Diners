@@ -13,8 +13,8 @@ export class App {
     config.options.root = '/';
     config.map([
       //{ route: '',              moduleId: PLATFORM.moduleName('no-selection'),   title: 'Select' },
-      { route: 'cycle', moduleId: PLATFORM.moduleName('cycle-detail'),   name: 'cycle', nav:true},
-      { route: 'cycle/:id',  moduleId: PLATFORM.moduleName('cycle-detail'), name:'cycles' },
+      { route: 'cycle', moduleId: PLATFORM.moduleName('cycle-list'),   name: 'cycle', nav:true},
+      { route: 'cycle/:id',  moduleId: PLATFORM.moduleName('cycle-detail'), name:'cycle-detail' },
       { route: 'cycle/active',  moduleId: PLATFORM.moduleName('cycle-active'), name:'cycle' }
     ]);
 

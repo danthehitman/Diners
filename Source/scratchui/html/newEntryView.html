@@ -1,0 +1,9 @@
+<div id="new-entry-container" style="display:none" data-bind="visible: showNewEntry">
+    <div id="newEntryCloseX" data-bind="click: closeNewEntry"></div>
+    <div>
+        <select id="buckets-select" data-bind="options:cycle.buckets, optionsText: 'name', value:selectedCycle, , selectmenu: {}"></select>
+    </div>
+    <div>
+        <input type="text">
+    </div>
+</div>

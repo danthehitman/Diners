@@ -55,7 +55,8 @@ namespace HL.Diners.Api
                 // Apply CORS policy for all users  
             });
 
-            services.AddEntityFrameworkNpgsql().AddDbContext<DinersContext>(options => options.UseNpgsql(connectionString));
+            services.AddEntityFrameworkNpgsql().AddDbContext<DinersContext>(options => options.UseNpgsql(connectionString,
+                x => x.UseNetTopologySuite()));
 
             services.AddAutoMapper();
             services.AddMvc(

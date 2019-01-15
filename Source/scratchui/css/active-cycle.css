@@ -1,0 +1,85 @@
+#active-cycle-container-div
+{
+  height:400px;
+  position: relative;
+}
+
+#active-cycle-summary-div
+{
+  left:0;
+  height:50%;
+  width:50%;
+  background-color: blue;
+  
+  position: absolute;
+}
+
+#active-cycle-top-buckets-div
+{
+  right:0px;
+  height:50%;
+  width:50%;
+  background-color: green;
+  
+  position: absolute;
+}
+
+#active-cycle-savings-div
+{
+  left:0px;
+  bottom: 0px;
+  height:50%;
+  width:50%;
+  background-color: orange;
+  
+  position: absolute;
+}
+
+#active-cycle-buffer-div
+{
+  right:0px;
+  bottom: 0px;
+  height:50%;
+  width:50%;
+  background-color: plum;
+  
+  position: absolute;
+}
+
+#plus-entry-button-div 
+{
+  width: 100px;
+	height: 100px;
+	background-color: red;
+
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	
+	margin: auto;
+}
+
+#new-entry-container
+{
+  background-color: black;
+  width:300px;
+  height:300px;
+  position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  margin:auto;
+}
+
+#newEntryCloseX
+{
+  position: absolute;
+  top:0;
+  right:0;
+  background-color: white;
+  height: 10px;
+  width: 10px;
+}

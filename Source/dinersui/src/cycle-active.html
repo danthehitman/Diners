@@ -1,12 +1,30 @@
 <template>
   <require from="./formatters/integerFormat"></require>
   <require from="./formatters/dateFormat"></require>
+  <require from="./css/active-cycle.css"></require>
+  <require from="./resources/elements/jquery-select"></require>
   <div class="card">
     <div class="card-header text-white bg-primary">
       <h3>${dateRange}</h3>
     </div>
-    <div>
-      
+    <div id="active-cycle-container-div">
+      <div id="active-cycle-summary-div" click.delegate="summaryClicked()"></div>
+      <div id="active-cycle-top-buckets-div"></div>
+      <div id="active-cycle-savings-div"></div>
+      <div id="active-cycle-buffer-div"></div>
+      <div id="plus-entry-button-div" click.delegate="newEntryClicked()"></div>      
+    </div>   
+
+    <div id="new-entry-container" show.bind="showNewEntry">
+      <div>
+        <jquery-ui-select name="myCustomSelect" selected.bind="defaultSelected" options.bind="cycle.buckets"></jquery-ui-select>
+        <!-- <select value.bind="tempdata">
+          <option repeat.for="bucket of cycle.buckets"
+                  model.bind="bucket">
+            ${bucket.name}
+          </option>
+        </select> -->
+      </div>
     </div>
   </div>
 </template>
