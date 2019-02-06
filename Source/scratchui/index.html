@@ -61,22 +61,52 @@
 
       <div id="active-cycle-container">
         <div id="activeCycleSummaryView"></div>
-        <script>$("#activeCycleSummaryView").load("html/activeCycleSummaryView.html");</script>
+        <!-- <script>$("#activeCycleSummaryView").load("html/activeCycleSummaryView.html");</script> -->
         <div id="activeCycleBucketsSummaryView"></div>
-        <script>$("#activeCycleBucketsSummaryView").load("html/activeCycleBucketsSummaryView.html");</script>
+        <!-- <script>$("#activeCycleBucketsSummaryView").load("html/activeCycleBucketsSummaryView.html");</script> -->
         <div id="activeCycleSavingsSummaryView"></div>
-        <script>$("#activeCycleSavingsSummaryView").load("html/activeCycleSavingsSummaryView.html");</script>
+        <!-- <script>$("#activeCycleSavingsSummaryView").load("html/activeCycleSavingsSummaryView.html");</script> -->
         <div id="active-cycle-buffer-container"></div>
         <div id="plus-entry-button-container" data-bind="click: newEntryClicked"></div>
       </div>
-      
-      <div id="new-entry-view" ></div>
-      <script>$("#new-entry-view").load("html/newEntryView.html");</script>
-      
+
+      <div id="new-entry-view"></div>
+      <!-- <script>$("#new-entry-view").load("html/newEntryView.html");</script> -->
+
     </div>
 
   </div>
 
 </body>
+
+<script>
+  (function () {
+    //$("#activeCycleSummaryView").load("html/activeCycleSummaryView.html");
+    //$("#activeCycleBucketsSummaryView").load("html/activeCycleBucketsSummaryView.html");
+    //$("#activeCycleSavingsSummaryView").load("html/activeCycleSavingsSummaryView.html");
+    //$("#new-entry-view").load("html/newEntryView.html");
+
+    $.when(
+      $.get('html/activeCycleSummaryView.html', function (data) {
+        $('#activeCycleSummaryView').html(data);
+      }),
+      $.get('html/activeCycleBucketsSummaryView.html', function (data) {
+        $('#activeCycleBucketsSummaryView').html(data);
+      }),
+      $.get('html/activeCycleSavingsSummaryView.html', function (data) {
+        $('#activeCycleSavingsSummaryView').html(data);
+      }),
+      $.get('html/newEntryView.html', function (data) {
+        $('#new-entry-view').html(data);
+      }),
+      $.Deferred(function (deferred) {
+        $(deferred.resolve);
+      })
+    ).done(function () {
+      diners.activeCycleApp.templatesLoaded = true;
+      //ko.applyBindings(diners.activeCycleApp);
+    });
+  })()  
+</script>
 
 </html>

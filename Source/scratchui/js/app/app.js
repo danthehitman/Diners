@@ -20,14 +20,23 @@ $(document).ready(function () {
 
 (function( diners, $, undefined ) {
 
-    var aca = diners.activeCycleApp = {};
+    var aca = diners.activeCycleApp = {templatesLoaded:false};
     
     diners.initializeAcitiveCycleApp = function()
     {
         var api = new DinersApi("https://192.168.1.25:5001");
         // var api = new DinersApi("https://localhost:5001");
-        aca.activeCycleVm = new diners.ActiveCycleViewModel(api);        
-        ko.applyBindings(aca);
+        aca.activeCycleVm = new diners.ActiveCycleViewModel(api);
+
+        var checkReady = function() {
+            if (aca.templatesLoaded) {
+                ko.applyBindings(aca);
+            } else {
+                setTimeout(checkReady, 100);
+            }
+        }
+        checkReady();
+        //ko.applyBindings(aca);
     };
 
 }( window.diners = window.diners || {}, jQuery ));
