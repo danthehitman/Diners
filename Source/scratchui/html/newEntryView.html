@@ -1,9 +1,14 @@
 <div id="new-entry-container" style="display:none" data-bind="visible: showNewEntry">
     <div id="newEntryCloseX" data-bind="click: closeNewEntry"></div>
     <div>
-        <select id="buckets-select" data-bind="options:cycle.buckets, optionsText: 'name', value:selectedCycle, , selectmenu: {}"></select>
+        <select id="buckets-select" data-bind="options:newEntryVm().buckets, optionsText: 'name', value:newEntryVm().selectedBucket, selectmenu: {}"></select>
     </div>
     <div>
-        <input type="text">
+        <div><label>Ammount: </label><input type="tel" onkeypress="return isNumberKey(event)" data-bind="value:newEntryVm().entry().ammount"></div>
+        <div><label>Name: </label><input type="text" data-bind="value:newEntryVm().entry().name"></div>
+        <div><label>Notes: </label><input type="text" data-bind="value:newEntryVm().entry().notes"></div>
+        <div><label>Location: </label><input type="text" data-bind="value:newEntryVm().entry().location"></div>
+        <div><label>Location: </label><input type="checkbox" data-bind="checked:newEntryVm().includeLocationPoint"></div>
     </div>
+    <div id="entrySaveButtonContainer"><input type="button" value="Save" data-bind="click:newEntryVm().saveEntryClicked"/></div>
 </div>

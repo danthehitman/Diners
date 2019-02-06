@@ -1,10 +1,10 @@
-#active-cycle-container-div
+#active-cycle-container
 {
   height:400px;
   position: relative;
 }
 
-#active-cycle-summary-div
+#activeCycleSummaryView
 {
   left:0;
   height:50%;
@@ -14,7 +14,7 @@
   position: absolute;
 }
 
-#active-cycle-top-buckets-div
+#activeCycleBucketsSummaryView
 {
   right:0px;
   height:50%;
@@ -24,7 +24,7 @@
   position: absolute;
 }
 
-#active-cycle-savings-div
+#activeCycleSavingsSummaryView
 {
   left:0px;
   bottom: 0px;
@@ -35,7 +35,7 @@
   position: absolute;
 }
 
-#active-cycle-buffer-div
+#active-cycle-buffer-container
 {
   right:0px;
   bottom: 0px;
@@ -46,7 +46,7 @@
   position: absolute;
 }
 
-#plus-entry-button-div 
+#plus-entry-button-container 
 {
   width: 100px;
 	height: 100px;
@@ -63,7 +63,7 @@
 
 #new-entry-container
 {
-  background-color: black;
+  background-color: gray;
   width:300px;
   height:300px;
   position: absolute;
@@ -82,4 +82,16 @@
   background-color: white;
   height: 10px;
   width: 10px;
+}
+
+#entrySaveButtonContainer
+{
+  position: absolute;
+  bottom:0;
+  right:0;
+}
+
+.summaryLabel
+{
+  color:white;
 }

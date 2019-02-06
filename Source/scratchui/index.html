@@ -5,47 +5,76 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-</head>
-
-<body>
+  <!-- Fav Icon Junk
+  <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  right now this is causing a cert authority message in the browser which is annoying.  I think its only for android.
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff"> -->
 
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/active-cycle.css">
   <link rel="stylesheet" href="css/jquery-ui/jquery-ui.min.css">
   <link rel="stylesheet" href="css/jquery-ui/jquery-ui.theme.min.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  
+
   <script src="js/lib/jquery-3.3.1.min.js"></script>
   <script src="js/lib/jquery-ui.min.js"></script>
+  <script src="js/lib/jquery-dateformat.min.js"></script>
   <script src="js/lib/knockout-3.4.2.js"></script>
   <script src="js/lib/knockout.mapping-2.4.1.js"></script>
   <script src="js/lib/bootstrap.min.js"></script>
-  <script src="js/lib/knockout-jqueryui.min.js"></script>
+  <!-- <script src="js/lib/knockout-jqueryui.min.js"></script> -->
 
-  <script src="js/ActiveCycleViewModel.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/dinersApi.js"></script>
-  <script src="js/observable.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/app/active-cycle-view-model.js"></script>
+  <script src="js/app/entry-view-model.js"></script>
+  <script src="js/app/cycle-view-model.js"></script>
+  <script src="js/app/models.js"></script>
+  <script src="js/app/utils.js"></script>
+  <script src="js/app/diners-api.js"></script>
+  <script src="js/app/observable.js"></script>
+  <script src="js/app/broker.js"></script>
+  <script src="js/app/diners-events.js"></script>
+  <script src="js/app/app.js"></script>
+</head>
 
-  <div id="app-container"></div>
-  <div id="active-cycle-container" class="center">
+<body>
 
-    <div class="card-header text-white bg-primary">
-      <h3>${dateRange}</h3>
+  <div id="app-container" data-bind="with: activeCycleVm">
+
+    <div id="active-cycle-container" class="center">
+
+      <div class="card-header text-white bg-primary" data-bind="html:getDateRange"></div>
+
+      <div id="active-cycle-container">
+        <div id="activeCycleSummaryView"></div>
+        <script>$("#activeCycleSummaryView").load("html/activeCycleSummaryView.html");</script>
+        <div id="activeCycleBucketsSummaryView"></div>
+        <script>$("#activeCycleBucketsSummaryView").load("html/activeCycleBucketsSummaryView.html");</script>
+        <div id="activeCycleSavingsSummaryView"></div>
+        <script>$("#activeCycleSavingsSummaryView").load("html/activeCycleSavingsSummaryView.html");</script>
+        <div id="active-cycle-buffer-container"></div>
+        <div id="plus-entry-button-container" data-bind="click: newEntryClicked"></div>
+      </div>
+      
+      <div id="new-entry-view" ></div>
+      <script>$("#new-entry-view").load("html/newEntryView.html");</script>
+      
     </div>
 
-    <div id="active-cycle-container-div">
-      <div id="active-cycle-summary-div" click.delegate="summaryClicked()"></div>
-      <div id="active-cycle-top-buckets-div"></div>
-      <div id="active-cycle-savings-div"></div>
-      <div id="active-cycle-buffer-div"></div>
-      <div id="plus-entry-button-div" data-bind="click: newEntryClicked"></div>
-    </div>
-
-    <div id="new-entry-view"></div>
-    <script>$("#new-entry-view").load("html/newEntryView.html");</script>
-    
   </div>
 
 </body>

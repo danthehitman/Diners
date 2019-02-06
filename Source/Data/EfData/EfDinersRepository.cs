@@ -35,6 +35,12 @@ namespace HL.Diners.Infrastructure.EfData
                 .FirstOrDefaultAsync(cycle => cycle.Id == id);
         }
 
+        public async Task<Bucket> GetBucketAsync(string id)
+        {
+            return await _context.Buckets.Include(bucket => bucket.Entries)
+                .FirstOrDefaultAsync(bucket => bucket.Id == id);
+        }
+
         public async Task<Cycle> UpdateCycleAsync(Cycle cycle)
         {
             _context.Entry(cycle).State = EntityState.Modified;
@@ -60,7 +66,7 @@ namespace HL.Diners.Infrastructure.EfData
 
         public async Task RemoveCycleAsync(string id)
         {
-            var cycle = await _context.Cycles.Include(c => c.Buckets).ThenInclude(b => b.Entries).FirstAsync(c => c.Id == id);
+            var cycle = await _context.Cycles.Include(c => c.Buckets).ThenInclude(b => b.Entries).FirstOrDefaultAsync(c => c.Id == id);
             if (cycle == null)
             {
                 throw new DinersNotFoundException();
@@ -75,10 +81,46 @@ namespace HL.Diners.Infrastructure.EfData
             return GetCyclesAsync().Result.Any(e => e.Id == id);
         }
 
-        public Task<Cycle> GetActiveCycleByUserAsync(string userId)
+        public async Task<Cycle> GetActiveCycleByUserAsync(string userId)
         {
-            return _context.Cycles.Include(cycle => cycle.Buckets).ThenInclude(bucket => bucket.Entries)
+            return await _context.Cycles.Include(cycle => cycle.Buckets).ThenInclude(bucket => bucket.Entries)
                 .FirstOrDefaultAsync(c => c.StartDate <= DateTime.Now && c.EndDate >= DateTime.Now);
+        }
+
+        public async Task<Entry> AddEntryAsync(Entry entry, string bucketId)
+        {
+            Bucket bucket = await GetBucketAsync(bucketId);
+            if (bucket == null)
+            {
+                throw new DinersNotFoundException();
+            }
+            bucket.Entries.Add(entry);
+            await _context.SaveChangesAsync();
+            return entry;
+        }
+
+        public async Task RemoveEntryAsync(string id)
+        {
+            var entry = await _context.Entries.FirstOrDefaultAsync(c => c.Id == id);
+            if (entry == null)
+            {
+                throw new DinersNotFoundException();
+            }
+
+            _context.Entries.Remove(entry);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Bucket> AddBucketAsync(Bucket bucket, string cycleId)
+        {
+            Cycle cycle = await GetCycleAsync(cycleId);
+            if (cycle == null)
+            {
+                throw new DinersNotFoundException();
+            }
+            cycle.Buckets.Add(bucket);
+            await _context.SaveChangesAsync();
+            return bucket;
         }
     }
 }

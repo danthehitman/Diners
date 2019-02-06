@@ -8,6 +8,8 @@ namespace HL.Diners.Infrastructure.EfData
     public class DinersContext : DbContext
     {
         public DbSet<Cycle> Cycles { get; set; }
+        public DbSet<Bucket> Buckets { get; set; }
+        public DbSet<Entry> Entries { get; set; }
 
         public DinersContext(DbContextOptions<DinersContext> options) : base(options) { }
 
@@ -19,6 +21,12 @@ namespace HL.Diners.Infrastructure.EfData
                 .HasConversion(
                     v => JsonConvert.SerializeObject(v),
                     v => JsonConvert.DeserializeObject<JObject>(v));
+
+            modelBuilder.Entity<Bucket>()
+               .ToTable("Bucket");
+
+            modelBuilder.Entity<Entry>()
+               .ToTable("Entry");
         }
     }
 }

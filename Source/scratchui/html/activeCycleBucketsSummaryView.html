@@ -1,0 +1,6 @@
+<div id="activeCycleBucketsSummaryContainer" data-bind="with: cycleVm">
+    <div data-bind="foreach: getTopBuckets(2)">
+            <h3 data-bind="text: name"></h3>
+            <p>Credits: <span data-bind="text: total"></span></p>
+    </div>
+</div>

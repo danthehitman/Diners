@@ -24,14 +24,14 @@ namespace Api.Controllers
 
         // GET: api/Cycles
         [HttpGet]
-        public async Task<IEnumerable<Cycle>> GetCycles()
+        public async Task<IEnumerable<Cycle>> GetAsync()
         {
             return await _db.GetCyclesAsync();
         }
 
         // GET: api/Cycles/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCycle([FromRoute] string id)
+        public async Task<IActionResult> GetAsync([FromRoute] string id)
         {
             if (!ModelState.IsValid)
             {
@@ -49,7 +49,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("active")]
-        public async Task<IActionResult> GetActiveCycle()
+        public async Task<IActionResult> GetActiveCycleAsync()
         {
             if (!ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace Api.Controllers
 
         // PUT: api/Cycles/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCycle([FromRoute] string id, [FromBody] CycleDto cycle)
+        public async Task<IActionResult> PutAsync([FromRoute] string id, [FromBody] CycleDto cycle)
         {
             if (!ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace Api.Controllers
 
         // POST: api/Cycles
         [HttpPost]
-        public async Task<IActionResult> PostCycle([FromBody] PostCycleDto postCycleDto)
+        public async Task<IActionResult> PostAsync([FromBody] PostCycleDto postCycleDto)
         {
             if (!ModelState.IsValid)
             {
@@ -110,7 +110,7 @@ namespace Api.Controllers
 
         // DELETE: api/Cycles/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCycle([FromRoute] string id)
+        public async Task<IActionResult> DeleteAsync([FromRoute] string id)
         {
             if (!ModelState.IsValid)
             {
