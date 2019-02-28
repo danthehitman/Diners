@@ -24,8 +24,8 @@ $(document).ready(function () {
     
     diners.initializeAcitiveCycleApp = function()
     {
-        var api = new DinersApi("https://192.168.1.25:5001");
-        // var api = new DinersApi("https://localhost:5001");
+        // var api = new DinersApi("https://192.168.1.25:5001");
+        var api = new DinersApi("https://127.0.0.1:5001");
         aca.activeCycleVm = new diners.ActiveCycleViewModel(api);
 
         var checkReady = function() {

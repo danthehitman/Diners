@@ -61,17 +61,12 @@
 
       <div id="active-cycle-container">
         <div id="activeCycleSummaryView"></div>
-        <!-- <script>$("#activeCycleSummaryView").load("html/activeCycleSummaryView.html");</script> -->
         <div id="activeCycleBucketsSummaryView"></div>
-        <!-- <script>$("#activeCycleBucketsSummaryView").load("html/activeCycleBucketsSummaryView.html");</script> -->
         <div id="activeCycleSavingsSummaryView"></div>
-        <!-- <script>$("#activeCycleSavingsSummaryView").load("html/activeCycleSavingsSummaryView.html");</script> -->
         <div id="active-cycle-buffer-container"></div>
         <div id="plus-entry-button-container" data-bind="click: newEntryClicked"></div>
       </div>
-
       <div id="new-entry-view"></div>
-      <!-- <script>$("#new-entry-view").load("html/newEntryView.html");</script> -->
 
     </div>
 
@@ -81,11 +76,6 @@
 
 <script>
   (function () {
-    //$("#activeCycleSummaryView").load("html/activeCycleSummaryView.html");
-    //$("#activeCycleBucketsSummaryView").load("html/activeCycleBucketsSummaryView.html");
-    //$("#activeCycleSavingsSummaryView").load("html/activeCycleSavingsSummaryView.html");
-    //$("#new-entry-view").load("html/newEntryView.html");
-
     $.when(
       $.get('html/activeCycleSummaryView.html', function (data) {
         $('#activeCycleSummaryView').html(data);
@@ -104,7 +94,6 @@
       })
     ).done(function () {
       diners.activeCycleApp.templatesLoaded = true;
-      //ko.applyBindings(diners.activeCycleApp);
     });
   })()  
 </script>
